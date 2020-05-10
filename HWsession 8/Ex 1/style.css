@@ -1,0 +1,18 @@
+body{
+    cursor: pointer;
+}
+#container {
+    display:flex;
+    padding: 200px;
+    justify-content: center;   
+}
+#number{
+    padding: 10px;
+    font-size: 30px;
+}
+button{
+    cursor: pointer;
+    border: none;
+    width: 50px;
+    font-size: 30px;
+}
