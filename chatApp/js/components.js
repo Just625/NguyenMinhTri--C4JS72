@@ -37,3 +37,24 @@ components.registerScreen=`
     </div>
 </div>
 `
+components.loginScreen= `
+<div class="login-container">
+            <div class="login-form">
+                <div class="title">MindX Chat</div>
+                <form id="form-login">
+                <div class="input-wrapper">
+                    <input type="text" name="email" placeholder="Email">
+                    <div class="error" id="error-email"></div>
+                </div>
+                <div class="input-wrapper">
+                    <input type="password" name="password" placeholder="Password">
+                    <div class="error" id="error-password"></div>
+                </div>
+                <div class="submit-wrapper">
+                    <div>Don't have an account ? <span class="cursor-pointer"id="redirect-to-register">Register</span></div>
+                    <button class = "btn"type='submit'>Login</button>
+                </div>
+            </form>
+            </div>
+        </div>
+`
