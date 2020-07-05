@@ -41,36 +41,20 @@ view.setActiveScreen = (screenName) => {
       const sendMessageForm = document.querySelector("#sendMessageForm");
       sendMessageForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        // const message = {
-        //   owner: model.currentUser.email,
-        //   content: sendMessageForm.message.value
-        // }
+        const message = {
+            content: `${sendMessageForm.message.value}`,
+            createdAt: `${new Date().toISOString()}`,
+            owner: `${model.currentUser.email}`
+        }
         // const messageFromBot = {
         //   owner: 'Bot',
         //   content: sendMessageForm.message.value
         // }
-        // if (sendMessageForm.message.value.trim() !== '') {
-        //   view.addMessage(message)
-        //   view.addMessage(messageFromBot)
-        // }
-        const docIdUpdate = "BKKQ1fi1r2VInfHJfTRc";
-        const dataToUpdate = {
-          messages: firebase.firestore.FieldValue.arrayUnion({
-            content: `${sendMessageForm.message.value}`,
-            createdAt: `${new Date().toISOString()}`,
-            owner: `${model.currentUser.email}`,
-          }),
-        };
-        if (sendMessageForm.message.value.trim() !== "") {
-          firebase
-            .firestore()
-            .collection(model.collectionName)
-            .doc(docIdUpdate)
-            .update(dataToUpdate)
-            .then((res) => {
-              alert("Updated");
-            });
+        if (sendMessageForm.message.value.trim() !== '') {
+          view.addMessage(message)
+          // view.addMessage(messageFromBot)
         }
+        model.updateMessageToDB(message)
         sendMessageForm.message.value = "";
       });
       model.loadConversations();

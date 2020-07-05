@@ -60,3 +60,20 @@ model.loadConversations = () => {
       console.log(data);
     });
 };
+
+model.updateMessageToDB = (message) => {
+  const docIdUpdate = "BKKQ1fi1r2VInfHJfTRc";
+        const dataToUpdate = {
+          messages: firebase.firestore.FieldValue.arrayUnion(message),
+        };
+        if (sendMessageForm.message.value.trim() !== "") {
+          firebase
+            .firestore()
+            .collection(model.collectionName)
+            .doc(docIdUpdate)
+            .update(dataToUpdate)
+            .then((res) => {
+              alert("Updated");
+            });
+        }
+}
