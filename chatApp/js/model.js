@@ -1,6 +1,6 @@
 const model = {};
 model.currentUser = undefined;
-model.collectionName = 'conversations';
+model.collectionName = "conversations";
 model.currentConversations = undefined;
 model.register = (firstName, lastName, email, password) => {
   firebase
@@ -45,14 +45,18 @@ model.login = (email, password) => {
     });
 };
 
-model.loadConversations = () =>{
-  firebase.firestore().collection(model.collectionName).get().then(res =>{
-    const data = ultis.getDataFromDocs(res.docs)
-    console.log(data[0])
-    if (data.length > 0 ){
-      model.currentConversation = data[0]
-      view.showCurrentConversation()
-    }
-    console.log(data)
-  })
-}
+model.loadConversations = () => {
+  firebase
+    .firestore()
+    .collection(model.collectionName)
+    .get()
+    .then((res) => {
+      const data = utils.getDataFromDocs(res.docs);
+      console.log(data[0]);
+      if (data.length > 0) {
+        model.currentConversation = data[0];
+        view.showCurrentConversation();
+      }
+      console.log(data);
+    });
+};

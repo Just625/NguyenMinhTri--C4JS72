@@ -36,11 +36,11 @@ view.setActiveScreen = (screenName) => {
         controller.login(loginInfo);
       });
       break;
-    case 'chatScreen':
-      document.getElementById('app').innerHTML = components.chatScreen
-      const sendMessageForm = document.querySelector('#sendMessageForm')
-      sendMessageForm.addEventListener('submit', (e) => {
-        e.preventDefault()
+    case "chatScreen":
+      document.getElementById("app").innerHTML = components.chatScreen;
+      const sendMessageForm = document.querySelector("#sendMessageForm");
+      sendMessageForm.addEventListener("submit", (e) => {
+        e.preventDefault();
         // const message = {
         //   owner: model.currentUser.email,
         //   content: sendMessageForm.message.value
@@ -53,20 +53,28 @@ view.setActiveScreen = (screenName) => {
         //   view.addMessage(message)
         //   view.addMessage(messageFromBot)
         // }
-  //       const docIdUpdate = 'BKKQ1fi1r2VInfHJfTRc'
-  //       const dataToUpdate = {
-  //         content: firebase.firestore.FieldValue.arrayUnion(`${sendMessageForm.message.value}`),
-  //         createdAt: firebase.firestore.FieldValue.arrayUnion(`${Date().toString()}`),
-  //         owner: firebase.firestore.FieldValue.arrayUnion(`${model.currentUser.email}`)
-  // }
-  // firebase.firestore().collection('a').doc(docIdUpdate).update(dataToUpdate).then (res =>{
-  //   alert('Updated')
-  // })
-        sendMessageForm.message.value = ''
-        
-      })
-      model.loadConversations()
-      break
+        const docIdUpdate = "BKKQ1fi1r2VInfHJfTRc";
+        const dataToUpdate = {
+          messages: firebase.firestore.FieldValue.arrayUnion({
+            content: `${sendMessageForm.message.value}`,
+            createdAt: `${new Date().toISOString()}`,
+            owner: `${model.currentUser.email}`,
+          }),
+        };
+        if (sendMessageForm.message.value.trim() !== "") {
+          firebase
+            .firestore()
+            .collection(model.collectionName)
+            .doc(docIdUpdate)
+            .update(dataToUpdate)
+            .then((res) => {
+              alert("Updated");
+            });
+        }
+        sendMessageForm.message.value = "";
+      });
+      model.loadConversations();
+      break;
   }
 };
 
@@ -74,27 +82,27 @@ view.setErrorMessage = (elementId, message) => {
   document.getElementById(elementId).innerText = message;
 };
 view.addMessage = (message) => {
-  const messageWrapper = document.createElement('div')
-  messageWrapper.classList.add('message')
-  if(model.currentUser.email === message.owner){
-    messageWrapper.classList.add('mine')
+  const messageWrapper = document.createElement("div");
+  messageWrapper.classList.add("message");
+  if (model.currentUser.email === message.owner) {
+    messageWrapper.classList.add("mine");
     messageWrapper.innerHTML = `
     <div class="content">${message.content}</div>
-    `
-  } else{
-    messageWrapper.classList.add('their')
-    messageWrapper.innerHTML= `
+    `;
+  } else {
+    messageWrapper.classList.add("their");
+    messageWrapper.innerHTML = `
     <div class="owner">${message.owner}</div>
     <div class="content">${message.content}</div>
-    `
+    `;
   }
-  const listMessage = document.querySelector('.list-message')
-  listMessage.appendChild(messageWrapper)
+  const listMessage = document.querySelector(".list-message");
+  listMessage.appendChild(messageWrapper);
   listMessage.scrollTop = listMessage.scrollHeight;
 };
 
-view.showCurrentConversation = () =>{
-  for(let oneMessage of model.currentConversation.messages){
-    view.addMessage(oneMessage)
+view.showCurrentConversation = () => {
+  for (let oneMessage of model.currentConversation.messages) {
+    view.addMessage(oneMessage);
   }
-}
+};
