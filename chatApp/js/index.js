@@ -12,6 +12,8 @@ window.onload = () => {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   console.log(firebase.app().name);
+  // templateQueryDatabase()
+
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       if (user.emailVerified) {
@@ -20,9 +22,68 @@ window.onload = () => {
           email: user.email,
         };
         view.setActiveScreen("chatScreen");
-      } 
+      }
     } else {
       view.setActiveScreen("loginScreen");
     }
   });
 };
+// templateQueryDatabase = () =>{
+//   const docId = 'oSVDl7gVcHKjOaeEU4S9'
+  //get one
+  // firebase.firestore().collection('a').doc(docId).get().then(res => {
+  //   console.log(getDataFromDoc(res))
+  // }).catch(err =>{
+  //   console.log(err)
+  // })
+
+  //get many
+  // firebase.firestore().collection('a').where('age','==',20).get().then(res =>{
+  //   console.log(res)
+  //   // console.log(getDataFromDoc(res.docs[0]))
+  //   console.log(getDataFromDocs(res.docs))
+  // })
+
+  //Create
+  // const dataToCreate = {
+  //   name: 'Create',
+  //   age: '18',
+  //   email: 'lskjflkajl@gmail.com',
+  //   phone: ['12312321']
+  // }
+  // firebase.firestore().collection('a').add(dataToCreate).then(res =>{
+  //   alert('Added')
+  // })
+
+  // update
+  // const docIdUpdate = 'Z9UvBF1uiW45DIHhPT7k'
+  // const dataToUpdate = {
+  //   name: 'Nguyen Van C',
+  //   phone: firebase.firestore.FieldValue.arrayUnion('12938109830192'),
+  //   email: 'aklsjdlaksj@gmail.com'
+  // }
+  // firebase.firestore().collection('a').doc(docIdUpdate).update(dataToUpdate).then (res =>{
+  //   alert('Updated')
+  // })
+
+  //delete
+  // const docIdDelete = 'gf8QpKOxH0dbwqgc0x0O'
+  // firebase.firestore().collection('a').doc(docIdDelete).delete().then(res =>{
+  //   alert('Deleted')
+  // })
+// }
+
+// const docIdUpdate = 'Z9UvBF1uiW45DIHhPT7k'
+//   const dataToUpdate = {
+//     test1 = [
+//       0={
+//         name: 'Nguyen Van C',
+//         phone: firebase.firestore.FieldValue.arrayUnion('12938109830192'),
+//         email: 'aklsjdlaksj@gmail.com'
+//       } 
+//   ]
+    
+//   }
+//   firebase.firestore().collection('a').doc(docIdUpdate).update(dataToUpdate).then (res =>{
+//     alert('Updated')
+//   })

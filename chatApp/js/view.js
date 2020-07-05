@@ -17,24 +17,6 @@ view.setActiveScreen = (screenName) => {
           password: registerForm.password.value,
           confirmPassword: registerForm.confirmPassword.value,
         };
-        // if(registerInfo.firstName === ''){
-        //     document.getElementById('error-first-name').innerText = "Please input first name"
-        // } else {document.getElementById('error-first-name').innerText = ""}
-        // if(registerInfo.lastName === ''){
-        //     document.getElementById('error-last-name').innerText = "Please input last name"
-        // } else {document.getElementById('error-last-name').innerText = ""}
-        // if(registerInfo.email === ''){
-        //     document.getElementById('error-email').innerText = "Please input email"
-        // } else {document.getElementById('error-email').innerText = ""}
-        // if(registerInfo.password === ''){
-        //     document.getElementById('error-password').innerText = "Please input password"
-        // } else {document.getElementById('error-password').innerText = ""}
-        // if(registerInfo.confirmPassword === ''){
-        //     document.getElementById('error-confirm-password').innerText = "Please input confirm password"
-        // } else if(registerInfo.confirmPassword !== registerInfo.password){
-        //     document.getElementById('error-confirm-password').innerText = "Password does not match"
-        // }
-        // else {document.getElementById('error-confirm-password').innerText = ""}
         controller.register(registerInfo);
       });
       break;
@@ -54,14 +36,65 @@ view.setActiveScreen = (screenName) => {
         controller.login(loginInfo);
       });
       break;
-    case "chatScreen":
-      document.getElementById("app").innerHTML = components.chatScreen;
-      document.getElementById("welcome-user").innerText =
-        "Welcome" + model.currentUser.displayName;
-      break;
+    case 'chatScreen':
+      document.getElementById('app').innerHTML = components.chatScreen
+      const sendMessageForm = document.querySelector('#sendMessageForm')
+      sendMessageForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        // const message = {
+        //   owner: model.currentUser.email,
+        //   content: sendMessageForm.message.value
+        // }
+        // const messageFromBot = {
+        //   owner: 'Bot',
+        //   content: sendMessageForm.message.value
+        // }
+        // if (sendMessageForm.message.value.trim() !== '') {
+        //   view.addMessage(message)
+        //   view.addMessage(messageFromBot)
+        // }
+  //       const docIdUpdate = 'BKKQ1fi1r2VInfHJfTRc'
+  //       const dataToUpdate = {
+  //         content: firebase.firestore.FieldValue.arrayUnion(`${sendMessageForm.message.value}`),
+  //         createdAt: firebase.firestore.FieldValue.arrayUnion(`${Date().toString()}`),
+  //         owner: firebase.firestore.FieldValue.arrayUnion(`${model.currentUser.email}`)
+  // }
+  // firebase.firestore().collection('a').doc(docIdUpdate).update(dataToUpdate).then (res =>{
+  //   alert('Updated')
+  // })
+        sendMessageForm.message.value = ''
+        
+      })
+      model.loadConversations()
+      break
   }
 };
 
 view.setErrorMessage = (elementId, message) => {
   document.getElementById(elementId).innerText = message;
 };
+view.addMessage = (message) => {
+  const messageWrapper = document.createElement('div')
+  messageWrapper.classList.add('message')
+  if(model.currentUser.email === message.owner){
+    messageWrapper.classList.add('mine')
+    messageWrapper.innerHTML = `
+    <div class="content">${message.content}</div>
+    `
+  } else{
+    messageWrapper.classList.add('their')
+    messageWrapper.innerHTML= `
+    <div class="owner">${message.owner}</div>
+    <div class="content">${message.content}</div>
+    `
+  }
+  const listMessage = document.querySelector('.list-message')
+  listMessage.appendChild(messageWrapper)
+  listMessage.scrollTop = listMessage.scrollHeight;
+};
+
+view.showCurrentConversation = () =>{
+  for(let oneMessage of model.currentConversation.messages){
+    view.addMessage(oneMessage)
+  }
+}
