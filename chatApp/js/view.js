@@ -42,22 +42,23 @@ view.setActiveScreen = (screenName) => {
       sendMessageForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const message = {
-            content: `${sendMessageForm.message.value}`,
-            createdAt: `${new Date().toISOString()}`,
-            owner: `${model.currentUser.email}`
+            content: sendMessageForm.message.value,
+            createdAt: new Date().toISOString(),
+            owner: model.currentUser.email
         }
         // const messageFromBot = {
         //   owner: 'Bot',
         //   content: sendMessageForm.message.value
         // }
         if (sendMessageForm.message.value.trim() !== '') {
-          view.addMessage(message)
+          model.addMessage(message)
           // view.addMessage(messageFromBot)
         }
-        model.updateMessageToDB(message)
+       
         sendMessageForm.message.value = "";
       });
       model.loadConversations();
+      model.listenConversationsChange()
       break;
   }
 };
