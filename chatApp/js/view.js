@@ -85,9 +85,25 @@ view.addMessage = (message) => {
   listMessage.appendChild(messageWrapper);
   listMessage.scrollTop = listMessage.scrollHeight;
 };
-
 view.showCurrentConversation = () => {
   for (let oneMessage of model.currentConversation.messages) {
     view.addMessage(oneMessage);
   }
 };
+view.showConversations = () =>{
+  for(oneConversation of model.conversations){
+    view.addConversation(oneConversation)
+  }
+}
+view.addConversation = (conversation) =>{
+  const conversationWrapper = document.createElement('div')
+  conversationWrapper.classList.add('conversation')
+  if(conversation.id === model.currentConversation.id){
+    conversationWrapper.classList.add('current')
+  }
+  conversationWrapper.innerHTML = `
+  <div class = conversation-title">${conversation.title}</div>
+  <div class = conversation-num-users">${conversation.users.length}</div>
+  `
+  document.querySelector('.list-conversation').appendChild(conversationWrapper)
+}

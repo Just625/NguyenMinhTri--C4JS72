@@ -2,6 +2,7 @@ const model = {};
 model.currentUser = undefined;
 model.collectionName = "conversations";
 model.currentConversation = undefined;
+model.conversations = undefined;
 model.register = (firstName, lastName, email, password) => {
   firebase
     .auth()
@@ -54,6 +55,8 @@ model.loadConversations = () => {
     .then((res) => {
       const data = utils.getDataFromDocs(res.docs);
       // console.log(data[0]);
+      model.conversations = data
+      view.showConversations()
       if (data.length > 0) {
         model.currentConversation = data[0];
         view.showCurrentConversation();
@@ -80,25 +83,36 @@ model.addMessage = (message) => {
 };
 
 model.listenConversationsChange = () => {
-  let isFirstRun = false
+  let isFirstRun = false;
   firebase
     .firestore()
     .collection(model.collectionName)
     .where("users", "array-contains", model.currentUser.email)
-    .onSnapshot((res) =>{
-      if (!isFirstRun){
-        isFirstRun = true
-        return
+    .onSnapshot((res) => {
+      if (!isFirstRun) {
+        isFirstRun = true;
+        return;
       }
-      const docChanges = res.docChanges()
-      console.log(docChanges)
-      for ( oneChange of docChanges) {
-        const type = oneChange.type
-        const oneChangeData = utils.getDataFromDoc(oneChange.doc)
-        console.log(oneChangeData)
-        if (oneChangeData.id === model.currentConversation.id){
-          model.currentConversation = oneChangeData
-          view.addMessage(oneChangeData.messages[oneChangeData.messages.length -1 ])
+      const docChanges = res.docChanges();
+      console.log(docChanges);
+      for (oneChange of docChanges) {
+        const type = oneChange.type;
+        const oneChangeData = utils.getDataFromDoc(oneChange.doc);
+        console.log(oneChangeData);
+        if (type === "modified") {
+          if (oneChangeData.id === model.currentConversation.id) {
+            model.currentConversation = oneChangeData;
+            view.addMessage(
+              oneChangeData.messages[oneChangeData.messages.length - 1]
+            );
+            for(let i = 0; i < model.conversations.length; i++){
+              const element = model.conversations[i]
+              if (element.id === oneChangeData.id){
+                model.conversations[i] = oneChangeData
+              }
+            }
+            console.log(model.conversations)
+          }
         }
       }
     });
