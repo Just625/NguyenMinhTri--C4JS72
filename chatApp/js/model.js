@@ -54,14 +54,12 @@ model.loadConversations = () => {
     .get()
     .then((res) => {
       const data = utils.getDataFromDocs(res.docs);
-      // console.log(data[0]);
       model.conversations = data
-      view.showConversations()
       if (data.length > 0) {
         model.currentConversation = data[0];
         view.showCurrentConversation();
       }
-      // console.log(data);
+      view.showConversations()
     });
 };
 

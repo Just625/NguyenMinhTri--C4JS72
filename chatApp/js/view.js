@@ -103,7 +103,23 @@ view.addConversation = (conversation) =>{
   }
   conversationWrapper.innerHTML = `
   <div class = conversation-title">${conversation.title}</div>
-  <div class = conversation-num-users">${conversation.users.length}</div>
+  <div class = conversation-num-users">${conversation.users.length} users</div>
   `
-  document.querySelector('.list-conversation').appendChild(conversationWrapper)
+  document.querySelector('.list-conversations').appendChild(conversationWrapper)
+  conversationWrapper.addEventListener('click', ()=> {
+    model.currentConversation = conversation
+    // console.log(conversationWrapper)
+    const conversationList = document.querySelectorAll(".conversation")
+    for (let i = 0; i < conversationList.length; i++){
+      conversationList[i].classList.remove('current')
+    }
+    conversationWrapper.classList.add('current')
+    const conversationTitle = document.querySelector(".conversation-title")
+    conversationTitle.innerHTML = `${conversation.title}`
+    const listMessage = document.querySelector(".list-message")
+    listMessage.innerHTML = ''
+    view.showCurrentConversation()
+  })  
 }
+
+

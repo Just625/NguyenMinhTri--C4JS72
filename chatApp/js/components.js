@@ -65,14 +65,6 @@ components.chatScreen = `
 <div class="chat-container">
 <div class= "aside-right" >
     <div class = list-conversations>
-        <div class = "conversation current">
-            <div class = conversation-title">First conversation</div>
-            <div class = conversation-num-users">2 users</div>
-        </div>
-        <div class = "conversation">
-            <div class = conversation-title">First conversation</div>
-            <div class = conversation-num-users">2 users</div>
-        </div>
     </div>
 </div>
         <div class="main">
