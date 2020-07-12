@@ -12,7 +12,7 @@ window.onload = () => {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   console.log(firebase.app().name);
-  // templateQueryDatabase()
+  // 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       if (user.emailVerified) {
@@ -66,8 +66,9 @@ window.onload = () => {
 // })
 
 //delete
-// const docIdDelete = 'gf8QpKOxH0dbwqgc0x0O'
-// firebase.firestore().collection('a').doc(docIdDelete).delete().then(res =>{
+// const docIdDelete = '3zcBJp7A77F9Lqh5jW6E'
+
+// firebase.firestore().collection('conversations').doc(docIdDelete).delete().then(res =>{
 //   alert('Deleted')
 // })
 // }

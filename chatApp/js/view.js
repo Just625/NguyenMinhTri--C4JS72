@@ -42,27 +42,70 @@ view.setActiveScreen = (screenName) => {
       sendMessageForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const message = {
-            content: sendMessageForm.message.value,
-            createdAt: new Date().toISOString(),
-            owner: model.currentUser.email
-        }
+          content: sendMessageForm.message.value,
+          createdAt: new Date().toISOString(),
+          owner: model.currentUser.email,
+        };
         // const messageFromBot = {
         //   owner: 'Bot',
         //   content: sendMessageForm.message.value
         // }
-        if (sendMessageForm.message.value.trim() !== '') {
-          model.addMessage(message)
+        if (sendMessageForm.message.value.trim() !== "") {
+          model.addMessage(message);
           // view.addMessage(messageFromBot)
         }
-       
+
         sendMessageForm.message.value = "";
       });
+      document
+        .getElementById("new-conversation")
+        .addEventListener("click", () => {
+          view.setActiveScreen("createConversationScreen");
+        });
       model.loadConversations();
-      model.listenConversationsChange()
+      model.listenConversationsChange();
+      break;
+    case "createConversationScreen":
+      document.getElementById("app").innerHTML =
+        components.createConversationScreen;
+      document.getElementById("back-to-chat").addEventListener("click", () => {
+        view.backToChatScreen();
+      });
+      const createConversationForm = document.getElementById(
+        "create-conversation-form"
+      );
+      createConversationForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = {
+          title: createConversationForm.title.value,
+          friendEmail: createConversationForm.email.value,
+        };
+        controller.createConversation(data.title, data.friendEmail);
+      });
       break;
   }
 };
-
+view.backToChatScreen = () => {
+  document.getElementById("app").innerHTML = components.chatScreen;
+  const sendMessageForm = document.querySelector("#sendMessageForm");
+  sendMessageForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const message = {
+      content: sendMessageForm.message.value,
+      createdAt: new Date().toISOString(),
+      owner: model.currentUser.email,
+    };
+    if (sendMessageForm.message.value.trim() !== "") {
+      model.addMessage(message);
+    }
+    sendMessageForm.message.value = "";
+  });
+  document.getElementById("new-conversation").addEventListener("click", () => {
+    view.setActiveScreen("createConversationScreen");
+  });
+  view.showConversations();
+  view.showCurrentConversation();
+};
 view.setErrorMessage = (elementId, message) => {
   document.getElementById(elementId).innerText = message;
 };
@@ -86,40 +129,63 @@ view.addMessage = (message) => {
   listMessage.scrollTop = listMessage.scrollHeight;
 };
 view.showCurrentConversation = () => {
+  document.querySelector(".list-message").innerHTML = "";
   for (let oneMessage of model.currentConversation.messages) {
     view.addMessage(oneMessage);
   }
+  const usersWrapper = document.createElement("div");
+  document.querySelector(".list-users").innerHTML = "";
+  model.currentConversation.users.forEach((element) => {
+    usersWrapper.insertAdjacentHTML("beforeend", `<div>${element}</div>`);
+  });
+  document.querySelector(".list-users").appendChild(usersWrapper);
 };
-view.showConversations = () =>{
-  for(oneConversation of model.conversations){
-    view.addConversation(oneConversation)
+view.showConversations = () => {
+  for (oneConversation of model.conversations) {
+    view.addConversation(oneConversation);
   }
-}
-view.addConversation = (conversation) =>{
-  const conversationWrapper = document.createElement('div')
-  conversationWrapper.classList.add('conversation')
-  if(conversation.id === model.currentConversation.id){
-    conversationWrapper.classList.add('current')
+};
+view.addConversation = (conversation) => {
+  const conversationWrapper = document.createElement("div");
+
+  conversationWrapper.classList.add("conversation");
+  if (conversation.id === model.currentConversation.id) {
+    conversationWrapper.classList.add("current");
   }
   conversationWrapper.innerHTML = `
   <div class = conversation-title">${conversation.title}</div>
   <div class = conversation-num-users">${conversation.users.length} users</div>
-  `
-  document.querySelector('.list-conversations').appendChild(conversationWrapper)
-  conversationWrapper.addEventListener('click', ()=> {
-    model.currentConversation = conversation
-    // console.log(conversationWrapper)
-    const conversationList = document.querySelectorAll(".conversation")
-    for (let i = 0; i < conversationList.length; i++){
-      conversationList[i].classList.remove('current')
-    }
-    conversationWrapper.classList.add('current')
-    const conversationTitle = document.querySelector(".conversation-title")
-    conversationTitle.innerHTML = `${conversation.title}`
-    const listMessage = document.querySelector(".list-message")
-    listMessage.innerHTML = ''
-    view.showCurrentConversation()
-  })  
-}
+  `;
 
+  conversationWrapper.addEventListener("click", () => {
+    //Cach 1:
+    // model.currentConversation = conversation
+    // const conversationList = document.querySelectorAll(".conversation")
+    // for (let i = 0; i < conversationList.length; i++){
+    //   conversationList[i].classList.remove('current')
+    // }
+    // conversationWrapper.classList.add('current')
+    // const conversationTitle = document.querySelector(".conversation-title")
+    // conversationTitle.innerHTML = `${conversation.title}`
+    // const listMessage = document.querySelector(".list-message")
+    // listMessage.innerHTML = ''
+    // view.showCurrentConversation()
 
+    //Cach cua thay
+    document.querySelector(".current").classList.remove("current");
+    conversationWrapper.classList.add("current");
+    const conversationTitle = document.querySelector(".conversation-title");
+    conversationTitle.innerHTML = `${conversation.title}`;
+    const usersWrapper = document.createElement("div");
+    document.querySelector(".list-users").innerHTML = "";
+    model.currentConversation.users.forEach((element) => {
+    usersWrapper.insertAdjacentHTML("beforeend", `<div>${element}</div>`);
+  });
+  document.querySelector(".list-users").appendChild(usersWrapper);
+    model.changeCurrentConversation(conversation.id);
+  });
+
+  document
+    .querySelector(".list-conversations")
+    .appendChild(conversationWrapper);
+};

@@ -1,25 +1,25 @@
 const controller = {};
+//Register validate function
 controller.register = (registerInfo) => {
-  if (registerInfo.firstName === "") {
-    view.setErrorMessage("error-first-name", "Please input first name");
-  } else {
-    view.setErrorMessage("error-first-name", "");
-  }
-  if (registerInfo.lastName === "") {
-    view.setErrorMessage("error-last-name", "Please input last name");
-  } else {
-    view.setErrorMessage("error-last-name", "");
-  }
+  view.setErrorMessage(
+    "error-first-name",
+    registerInfo.firstName === "" ? "Please input first name" : ""
+  );
+  view.setErrorMessage(
+    "error-last-name",
+    registerInfo.lastName === "" ? "Please input last name" : ""
+  );
   if (registerInfo.email === "") {
-    view.setErrorMessage("error-email", "Please input email");
+    view.setErrorMessage("error-email", "Please input email ");
+  } else if (controller.validateEmail(registerInfo.email) === false) {
+    view.setErrorMessage("error-email", "Please type the right format");
   } else {
     view.setErrorMessage("error-email", "");
   }
-  if (registerInfo.password === "") {
-    view.setErrorMessage("error-password", "Please input password");
-  } else {
-    view.setErrorMessage("error-password", "");
-  }
+  view.setErrorMessage(
+    "error-password",
+    registerInfo.password === "" ? "Please input password " : ""
+  );
   if (registerInfo.confirmPassword === "") {
     view.setErrorMessage(
       "error-confirm-password",
@@ -32,6 +32,7 @@ controller.register = (registerInfo) => {
   } else {
     view.setErrorMessage("error-confirm-password", "");
   }
+
   if (
     registerInfo.firstName !== "" &&
     registerInfo.lastName !== "" &&
@@ -46,18 +47,59 @@ controller.register = (registerInfo) => {
     );
   }
 };
+
+//Login validate function
 controller.login = (loginInfo) => {
-  if (loginInfo.email === "") {
-    view.setErrorMessage("error-email", "Please input email");
-  } else {
-    view.setErrorMessage("error-email", "");
-  }
-  if (loginInfo.password === "") {
-    view.setErrorMessage("error-password", "Please input password");
-  } else {
-    view.setErrorMessage("error-password", "");
-  }
+  view.setErrorMessage(
+    "error-email",
+    loginInfo.email === "" ? "Please input email" : ""
+  );
+  view.setErrorMessage(
+    "error-password",
+    loginInfo.password === "" ? "Please input password" : ""
+  );
   if (loginInfo.email !== "" && loginInfo.password !== "") {
     model.login(loginInfo.email, loginInfo.password);
   }
+};
+
+//Create new conversation validate function
+controller.createConversation = (title, friendEmail) => {
+  view.setErrorMessage(
+    "conversation-name-error",
+    title === "" ? "Please input title" : ""
+  );
+  if (friendEmail === "" ){
+    view.setErrorMessage("conversation-email-error","Please input friend email")
+  } else if (controller.validateEmail(friendEmail) === false){
+    view.setErrorMessage("conversation-email-error","Wrong email format")
+  } else {
+    view.setErrorMessage("conversation-email-error","")
+  }
+  // view.setErrorMessage(
+  //   "conversation-email-error",
+  //   friendEmail === "" ? "Please input friend email" : ""
+  // );
+  // view.setErrorMessage(
+  //   "conversation-email-error",
+  //   controller.validateEmail(friendEmail) === false ? "Wrong email format" : ""
+  // );
+  if (
+    title !== "" &&
+    friendEmail !== "" &&
+    controller.validateEmail(friendEmail) !== false
+  ) {
+    model.createConversation({
+      title,
+      users: [friendEmail, model.currentUser.email],
+      createdAt: new Date().toISOString(),
+      messages: [],
+    });
+  }
+};
+
+//Validate email function
+controller.validateEmail = (email) => {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 };

@@ -54,12 +54,12 @@ model.loadConversations = () => {
     .get()
     .then((res) => {
       const data = utils.getDataFromDocs(res.docs);
-      model.conversations = data
+      model.conversations = data;
       if (data.length > 0) {
         model.currentConversation = data[0];
         view.showCurrentConversation();
       }
-      view.showConversations()
+      view.showConversations();
     });
 };
 
@@ -67,7 +67,6 @@ model.addMessage = (message) => {
   const dataToUpdate = {
     messages: firebase.firestore.FieldValue.arrayUnion(message),
   };
-  // console.log(model.currentConversation)
   if (sendMessageForm.message.value.trim() !== "") {
     firebase
       .firestore()
@@ -103,15 +102,39 @@ model.listenConversationsChange = () => {
             view.addMessage(
               oneChangeData.messages[oneChangeData.messages.length - 1]
             );
-            for(let i = 0; i < model.conversations.length; i++){
-              const element = model.conversations[i]
-              if (element.id === oneChangeData.id){
-                model.conversations[i] = oneChangeData
+            for (let i = 0; i < model.conversations.length; i++) {
+              const element = model.conversations[i];
+              if (element.id === oneChangeData.id) {
+                model.conversations[i] = oneChangeData;
               }
             }
-            console.log(model.conversations)
+            console.log(model.conversations);
           }
+        } else if (type === "added"){
+          console.log(oneChangeData)
+          model.conversations.push(oneChangeData)
+          view.addConversation(oneChangeData)
         }
       }
     });
 };
+model.changeCurrentConversation = (conversationId) => {
+  //Cach 1: dung ham for
+  // for (conversation of model.conversations){
+  //   if (conversation.id == conversationId) {
+  //     model.currentConversation = conversation
+  //   }
+  // }
+  //Cach 2 : dung filter
+  model.currentConversation = model.conversations.filter(
+    (item) => item.id == conversationId
+  )[0];
+  // console.log(model.conversations.
+  //   filter((item) => item.id == conversationId)[0])
+  view.showCurrentConversation();
+};
+
+model.createConversation = (newConversation) =>{ 
+  firebase.firestore().collection(model.collectionName).add(newConversation)
+  view.backToChatScreen()
+}
