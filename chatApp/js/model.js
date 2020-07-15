@@ -72,10 +72,10 @@ model.addMessage = (message) => {
       .firestore()
       .collection(model.collectionName)
       .doc(model.currentConversation.id)
-      .update(dataToUpdate)
-      .then((res) => {
-        // alert("Updated");
-      });
+      .update(dataToUpdate);
+    // .then((res) => {
+    //    alert("Updated");
+    // });
   }
 };
 
@@ -98,22 +98,38 @@ model.listenConversationsChange = () => {
         console.log(oneChangeData);
         if (type === "modified") {
           if (oneChangeData.id === model.currentConversation.id) {
+            //Nếu như them tin nhắn mới
+            if (
+              oneChangeData.users.length ===
+              model.currentConversation.users.length
+            ) {
+              view.addMessage(
+                oneChangeData.messages[oneChangeData.messages.length - 1]
+              );
+            } else {
+              // Thêm users mới
+              view.addUser(oneChangeData.users[oneChangeData.users.length - 1]);
+            }
             model.currentConversation = oneChangeData;
-            view.addMessage(
-              oneChangeData.messages[oneChangeData.messages.length - 1]
-            );
             for (let i = 0; i < model.conversations.length; i++) {
               const element = model.conversations[i];
               if (element.id === oneChangeData.id) {
                 model.conversations[i] = oneChangeData;
+                if (
+                  oneChangeData.messages[oneChangeData.messages.length - 1]
+                    .owner !== model.currentUser.email
+                ) {
+                  view.showNotify(oneChangeData.id);
+                }
               }
             }
             console.log(model.conversations);
           }
-        } else if (type === "added"){
-          console.log(oneChangeData)
-          model.conversations.push(oneChangeData)
-          view.addConversation(oneChangeData)
+        } else if (type === "added") {
+          console.log(oneChangeData);
+          model.conversations.push(oneChangeData);
+          view.addConversation(oneChangeData);
+          view.showNotify(oneChangeData.id);
         }
       }
     });
@@ -134,7 +150,18 @@ model.changeCurrentConversation = (conversationId) => {
   view.showCurrentConversation();
 };
 
-model.createConversation = (newConversation) =>{ 
-  firebase.firestore().collection(model.collectionName).add(newConversation)
-  view.backToChatScreen()
-}
+model.createConversation = (newConversation) => {
+  firebase.firestore().collection(model.collectionName).add(newConversation);
+  view.backToChatScreen();
+};
+
+model.addUser = (email) => {
+  const dataToUpdate = {
+    users: firebase.firestore.FieldValue.arrayUnion(email),
+  };
+  firebase
+    .firestore()
+    .collection(model.collectionName)
+    .doc(model.currentConversation.id)
+    .update(dataToUpdate);
+};

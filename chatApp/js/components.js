@@ -71,7 +71,7 @@ components.chatScreen = `
     </div>
     <div class="main">
         <div class="conversation-detail">
-            <div class="conversation-title">First conversation</div>
+            <div class="conversation-title"></div>
             <div class="list-message"></div>
             <form id="sendMessageForm">
               <input  class = "input" type="text" name="message" placeholder="Type a message">
@@ -82,6 +82,15 @@ components.chatScreen = `
     <div class = "aside-right"> 
         <div class = "list-users">
         </div>
+        <form  id="add-user-form">
+            <div class = "input-wrapper">
+                <input type = "text" name ="email" placeholder ="Enter friend email">
+                <div class = "error" id="add-user-email-error"></div>
+            </div>
+            <div class="submitBtn">
+                <button type="submit" class="btn">Add</button>
+            </div>
+        </form>
     </div>
 </div>
 `;

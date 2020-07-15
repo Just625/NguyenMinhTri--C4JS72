@@ -69,12 +69,15 @@ controller.createConversation = (title, friendEmail) => {
     "conversation-name-error",
     title === "" ? "Please input title" : ""
   );
-  if (friendEmail === "" ){
-    view.setErrorMessage("conversation-email-error","Please input friend email")
-  } else if (controller.validateEmail(friendEmail) === false){
-    view.setErrorMessage("conversation-email-error","Wrong email format")
+  if (friendEmail === "") {
+    view.setErrorMessage(
+      "conversation-email-error",
+      "Please input friend email"
+    );
+  } else if (controller.validateEmail(friendEmail) === false) {
+    view.setErrorMessage("conversation-email-error", "Wrong email format");
   } else {
-    view.setErrorMessage("conversation-email-error","")
+    view.setErrorMessage("conversation-email-error", "");
   }
   // view.setErrorMessage(
   //   "conversation-email-error",
@@ -102,4 +105,16 @@ controller.createConversation = (title, friendEmail) => {
 controller.validateEmail = (email) => {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
+};
+
+//Add user
+controller.addUser = (email) => {
+  if (email === "") {
+    view.setErrorMessage("add-user-email-error", "Please input friend email");
+  } else if (controller.validateEmail(email) === false) {
+    view.setErrorMessage("add-user-email-error", "Wrong email format");
+  } else {
+    view.setErrorMessage("add-user-email-error", "");
+    model.addUser(email);
+  }
 };

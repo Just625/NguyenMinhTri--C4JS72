@@ -12,7 +12,7 @@ window.onload = () => {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   console.log(firebase.app().name);
-  // 
+  //
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       if (user.emailVerified) {
