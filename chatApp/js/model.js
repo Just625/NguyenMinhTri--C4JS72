@@ -95,8 +95,8 @@ model.listenConversationsChange = () => {
       for (oneChange of docChanges) {
         const type = oneChange.type;
         const oneChangeData = utils.getDataFromDoc(oneChange.doc);
-        console.log(oneChangeData);
         if (type === "modified") {
+          console.log(oneChangeData);
           if (oneChangeData.id === model.currentConversation.id) {
             //Nếu như them tin nhắn mới
             if (
@@ -111,22 +111,22 @@ model.listenConversationsChange = () => {
               view.addUser(oneChangeData.users[oneChangeData.users.length - 1]);
             }
             model.currentConversation = oneChangeData;
-            for (let i = 0; i < model.conversations.length; i++) {
-              const element = model.conversations[i];
-              if (element.id === oneChangeData.id) {
-                model.conversations[i] = oneChangeData;
-                if (
-                  oneChangeData.messages[oneChangeData.messages.length - 1]
-                    .owner !== model.currentUser.email
-                ) {
-                  view.showNotify(oneChangeData.id);
-                }
+          }
+          for (let i = 0; i < model.conversations.length; i++) {
+            const element = model.conversations[i];
+            if (element.id === oneChangeData.id) {
+              model.conversations[i] = oneChangeData;
+              if (
+                oneChangeData.messages[oneChangeData.messages.length - 1]
+                  .owner !== model.currentUser.email
+              ) {
+                view.showNotify(oneChangeData.id);
               }
             }
-            console.log(model.conversations);
           }
+          // console.log(model.conversations);
         } else if (type === "added") {
-          console.log(oneChangeData);
+          // console.log(oneChangeData);
           model.conversations.push(oneChangeData);
           view.addConversation(oneChangeData);
           view.showNotify(oneChangeData.id);

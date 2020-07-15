@@ -125,6 +125,13 @@ view.backToChatScreen = () => {
     controller.addUser(addUserForm.email.value);
     addUserForm.email.value = "";
   });
+  document
+    .querySelector("#sendMessageForm input")
+    .addEventListener("click", () => {
+      document.getElementById(
+        model.currentConversation.id
+      ).lastElementChild.style = "display: none";
+    });
 };
 
 view.setErrorMessage = (elementId, message) => {
@@ -146,6 +153,7 @@ view.addMessage = (message) => {
     <div class="content">${message.content}</div>
     `;
   }
+  // console.log('test')
   const listMessage = document.querySelector(".list-message");
   listMessage.appendChild(messageWrapper);
   listMessage.scrollTop = listMessage.scrollHeight;
@@ -181,6 +189,7 @@ view.addUser = (user) => {
 };
 
 view.showConversations = () => {
+  document.querySelector(".list-conversations").innerHTML = "";
   for (oneConversation of model.conversations) {
     view.addConversation(oneConversation);
   }
@@ -188,7 +197,6 @@ view.showConversations = () => {
 
 view.addConversation = (conversation) => {
   const conversationWrapper = document.createElement("div");
-
   conversationWrapper.classList.add("conversation");
   conversationWrapper.id = conversation.id;
   if (conversation.id === model.currentConversation.id) {
@@ -226,7 +234,7 @@ view.addConversation = (conversation) => {
     model.changeCurrentConversation(conversation.id);
     conversationWrapper.lastElementChild.style = "display: none";
   });
-
+  // console.log("Test");
   document
     .querySelector(".list-conversations")
     .appendChild(conversationWrapper);
