@@ -207,7 +207,21 @@ view.addConversation = (conversation) => {
   <div class = "conversation-num-users">${conversation.users.length} users</div>
   <div class ="conversation-notify"></div>
   `;
-
+  
+  const mediaQuery = window.matchMedia("screen and (max-width: 768px)");
+  if (mediaQuery.matches) {
+    conversationWrapper.firstElementChild.innerText = conversation.title.charAt(0);
+    document.getElementById("new-conversation").innerText = "+";
+  }
+  mediaQuery.addListener((mediaMatch) =>{
+    if(mediaMatch.matches){
+      conversationWrapper.firstElementChild.innerText = conversation.title.charAt(0);
+      document.getElementById("new-conversation").innerText = "+"
+    } else {
+      conversationWrapper.firstElementChild.innerText = conversation.title;
+      document.getElementById("new-conversation").innerText = "+ New conversation"
+    }
+  })
   conversationWrapper.addEventListener("click", () => {
     //Cach 1:
     // model.currentConversation = conversation
@@ -234,7 +248,7 @@ view.addConversation = (conversation) => {
     model.changeCurrentConversation(conversation.id);
     conversationWrapper.lastElementChild.style = "display: none";
   });
-  // console.log("Test");
+  console.log("Test");
   document
     .querySelector(".list-conversations")
     .appendChild(conversationWrapper);
