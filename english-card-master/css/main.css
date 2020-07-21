@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Epilogue', sans-serif;
+}
+ul{
+    list-style: none;
+}
+nav{
+    background-color: #FFE500;
+}
+i{
+    color: black;
+    margin-right: 4px;
+}
+.app{
+    height: 100vh;
+}
