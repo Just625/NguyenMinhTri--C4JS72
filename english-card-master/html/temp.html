@@ -4,81 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>    <link rel="stylesheet" href="../css/main.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/collections.css">
     <link rel="stylesheet" href="../css/screenCard.css">
+    <link rel="stylesheet" href="../css/createCard.css">
+    <link rel="stylesheet" href="../css/editCardScreen.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Geo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Epilogue&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="add-card">
-        <nav>
-            <div class="nav-bar-container">
-                <div class="logo">
-                    ECARD
-                </div>
-                <div class="list-main-navbar">
-                    <div class="navbar-item"><i class="fas fa-home"></i>Home</div>
-                    <div class="navbar-item"><i class="fas fa-plus"></i>Create</div>
-                    <div class="navbar-item"><i class="fas fa-user"></i>User</div>
-                </div>
+    <div class="edit-card-screen">
+        <div class="edit-card-main">
+            <div class="infor-collection-card-edit">
+                <form runat="server">
+                    <div class="eidt-collection-card">
+                        <div class="image-colection">
+                            <input type="file" name="imageCollectionEdit" id="collectionCardEdit">
+                            <img src="../image/tải xuống.png" id="imageCollectionCardEdit" alt="">
+                            <div class='error' id="errorImageCollectionEdit"></div>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" placeholder="Content" name='content'>
+                            <div class="error" id="errorContentEdit"></div>
+                        </div>
+                        <button class="btn-create" id="button-submit-collection-edit" type="submit"><i
+                                class="fas fa-check" style="color: white;"></i></button>
+                        <div class="error" id="errorAmountCardEdit"></div>
+                    </div>
+                </form>
             </div>
-        </nav>
-        <div class="create-card">
-            <form action=""></form>
-            <div class="collection-card">
-                <div class="image-collection-cover">
-                    <img src="../image/family_ilustration.png" alt="">
+            <div class="main-edit-card">
+                <div class="card-wrapper">
+                    <div class="card">
+                        <div class="font-card">
+                            <div class="image-card">
+                                <input type="file" name="imageCard" id="inputImageCardEdit">
+                                <img src="${card.imageVocab}" alt="" id="imageCardEdit">
+                                <div class="error" id='imageCollectionErrorEdit'></div>
+                            </div>
+                            <div class="main-vocab">
+                                <div class="input-vocab">
+                                    <input type="text" name="vocab" placeholder="Add vocab" value="${card.vocab}">
+                                    <div class="error" id='vocabErrorEdit'></div>
+                                </div>
+                                <div class="pronuncitaion">
+                                    <div class="sound">
+                                        <input type="file" name="sound">
+                                        <i class="fas fa-volume-up"></i>
+                                        <div class="error" id='soundErrorEdit'></div>
+                                    </div>
+                                    <div class="input-wrapper">
+                                        <input type="text" name="pronun" placeholder="Add pronun" value="${card.pronunciation}" >
+                                        <div class="error" id="pronunErrorEdit"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="back-card">
+                            <div class="input-wrapper">
+                                <input type="text" name="meaning" placeholder="Meaning" value="${card.meaning}">
+                                <div class="error" id='meaningErrorEdit'></div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" name="samemeaning" placeholder="Same meaning" value="${card.sameMeaning}">
+                                <div class="error" id='sameMeaningErrorEdit'></div>
+                            </div>
+                            <div class="Example">
+                                <h3 style="padding-left: 20px ;">Example</h3>
+                                <input type="text" name="example" placeholder="Add Example">
+                                <div class="error" id='exampleErrorEdit'></div>
+                            </div>
+                        </div>
+                        <button > <i class="far fa-check-circle"></i></button>
+                    </div>
                 </div>
-                <p>Chủ đề: Family</p>
-                <p>Số thẻ: 20</p>
-                <p>Của: Phạm Đức Thắng</p>
+                <button class="btn-add-card" id="button-add-card" type="button"><i
+                        class="fas fa-plus-circle"></i></button>
             </div>
-            <div class="main-add-card">
-                <div class="card">
-                    <div class="font-card">
-                        <div class="image-card">
-                            <img src="../image/pngtree-illustration-hand-painted-image-mother-embraces-children-png-image_704525.jpg
-                            " alt="">
-                        </div>
-                        <div class="main-vocab">
-                            <div class="vocab" style="font-size: 55px;">Mom</div>
-                            <div class="pronun" style="font-size: 30px;"><i class="fas fa-volume-up"></i>/mɒm/</div>
-                        </div>
-                    </div>
-                    <div class="back-card">
-                        <p class="meaning">Meaning: Người mẹ</p>
-                        <p class="same-meaning">Same meaning: Mother</p>
-                        <p class="notes">My mom is the best woman of my life</p>
-                        <p class="notes">When i go home who i want first meet is my mom</p>
-                        
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="font-card">
-                        <div class="image-card">
-                            <img src="../image/pngtree-illustration-hand-painted-image-mother-embraces-children-png-image_704525.jpg
-                            " alt="">
-                        </div>
-                        <div class="main-vocab">
-                            <div class="vocab" style="font-size: 55px;">Mom</div>
-                            <div class="pronun" style="font-size: 30px;"><i class="fas fa-volume-up"></i>/mɒm/</div>
-                        </div>
-                    </div>
-                    <div class="back-card">
-                        <p class="meaning">Meaning: Người mẹ</p>
-                        <p class="same-meaning">Same meaning: Mother</p>
-                        <p class="notes">My mom is the best woman of my life</p>
-                        <p class="notes">When i go home who i want first meet is my mom</p>
-                        
-                    </div>
-                </div>
-            </div>
-
         </div>
-        </div>  
-
+    </div>
+    <script src="../js/jquery.js"></script>
 </body>
 
 </html>

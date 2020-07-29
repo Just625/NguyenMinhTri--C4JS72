@@ -1,74 +1,51 @@
 .add-card {
     height: auto;
-    background-color: #d2fffd;
+    background-color: D2FFFF;
+    
 }
-.add-card .nav-bar-container {
-    height: 50px;
-    display: flex;
-    margin: 0px 144px;
-    justify-content: space-between;
-}
-.add-card .nav-bar-container .logo {
-    line-height: 50px;
-    font-size: 36px;
-    font-weight: 600;
-}
-.add-card .nav-bar-container .list-main-navbar {
-    width: 416px;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
 
-}
-.add-card .nav-bar-container .list-main-navbar .navbar-item {
-    font-weight: 500;
-    font-size: 25px;
-}
-.add-card .nav-bar-container .list-main-navbar .navbar-item i{
-    line-height: 50px;
-}
-.add-card .nav-bar-container .list-main-navbar .navbar-item:hover{
-    color: rgb(141, 140, 140);
-}
 .add-card .create-card {
-    width: 1520px;
-    margin: auto;
-    margin-top: 39px;
+    /* width: 1520px; */
+    margin-left: 3%;
+    margin-right: 5%;
     display:flex;
     justify-content: space-between;
+    padding-bottom:30px;
 }
-.add-card .create-card .collection-card {
+.add-card .create-card .infor-collection-card {
     width: 350px;
     height: 738px;
-
-    background: #FFE500;
+    margin-top:38px;
+    background: #fffeff;
     border: 1px solid rgba(159, 244, 178, 0.5);
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+    margin-right:20px;
 }
 
 
 .add-card .create-card .main-add-card {
-    width:1000px;
-    
+    /* width:1000px; */
+    margin-top: 38px;
     background: #FFFFFF;
     box-shadow: inset 0px 4px 2px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
-    
+    overflow-y: auto;
+    height: 100vh;
 }
-.add-card .create-card .collection-card .image-collection-cover img {
+.add-card .create-card .infor-collection-card .image-collection-cover img {
     width: 275px;
     height: 271px;
     border-radius: 20px;
     margin: 35px;
 }
-.add-card .create-card .collection-card p {
+.add-card .create-card .infor-collection-card p {
     font-size: 25px;
     margin: 25px 0px 25px 28px;
-    font-family: 'Epilogue', sans-serif;
+    font-family: 'Lato';
 }
 .add-card .create-card .main-add-card .card .font-card img {
     width: 260px;
@@ -76,11 +53,12 @@
     margin: 42px 42px 0px 42px;
 }
 .add-card .create-card .main-add-card .card{
-    margin: 43px;
+    margin: 30px;
     display: flex;
     justify-content: space-around;
 }
 .add-card .create-card .main-add-card .card .font-card{
+    margin-right:15px;
     width: 425px;
     height: 420px;
     /* width: 557px; */
@@ -107,7 +85,43 @@
 }
 .add-card .create-card .main-add-card .card .back-card p{
     font-size: 20px;
-    margin: 20px;
-   
+}
+.add-card .create-card .main-add-card .card .back-card .listNotes{
+    margin: 30px;
+}
+.add-card .create-card .main-add-card .card .back-card .listNotes >*{
+    margin-bottom:40px;
+    margin-top:40px;
 }
 
+.add-card .create-card .infor-collection-card p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.add-card .create-card .infor-collection-card .chu-de{
+    font-size: 50px;
+    font-weight: bold;
+}
+.add-card .create-card .infor-collection-card #btnToQuizz{
+    background: none;
+    border: 2px solid #32cdff;
+    color: #32cdff;
+    padding: 11px 23px 7px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin: 10px;
+}
+.add-card .create-card .infor-collection-card #btnToEdit{
+    background: none;
+    border: 2px solid #32cdff;
+    color: #32cdff;
+    padding: 11px 23px 7px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin: 10px;
+}

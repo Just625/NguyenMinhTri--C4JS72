@@ -1,0 +1,27 @@
+._3ThX2 {
+  color: inherit;
+  font-family:  sans-serif;
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 15px;
+}
+.footer {
+  
+  background-color: #dbdbdb;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+}
+._3ThX2:hover{
+  color:#4DABF7;
+}
+.fa-facebook-square{
+  color:#0F90F3;
+}
+.fa-twitter-square{
+  color:#1DA1F2;
+}

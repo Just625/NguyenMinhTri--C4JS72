@@ -2,21 +2,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-card</title>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>  
+    <title>Document</title>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/collections.css">
     <link rel="stylesheet" href="../css/screenCard.css">
-    <link href="https://fonts.googleapis.com/css2?family=Geo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/createCard.css">
+    <link rel="stylesheet" href="../css/editCardScreen.css">
     <link rel="stylesheet" href="../css/loginScreen.css" />
+    <link rel="stylesheet" href="../css/register.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Geo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Epilogue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/register.css">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-storage.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAERUxg1sEbP7UcAA7z7i9FN9lsSZQtMII",
+            authDomain: "flashcard-online.firebaseapp.com",
+            databaseURL: "https://flashcard-online.firebaseio.com",
+            projectId: "flashcard-online",
+            storageBucket: "flashcard-online.appspot.com",
+            messagingSenderId: "979888831859",
+            appId: "1:979888831859:web:443ef7ce89317546cc1906"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
 </head>
+
 <body>
-    <div id="app">     
+    <div class='app-container'>
+        <nav>
+            <div class="nav-bar-container">
+                <div class="logo">
+                    ECARD
+                </div>
+                <div class="list-main-navbar">
+                    <div class="navbar-item"><i class="fas fa-home"></i>Home</div>
+                    <div class="navbar-item" id="nav-create"><i class="fas fa-plus"></i>Create</div>
+                    <div class="navbar-item"><i class="fas fa-user"></i>User</div>
+                </div>
+            </div>
+        </nav>
+        <div id="app">
+
+        </div>
+        <div class="footer">
+            <a class="_3ThX2" href="">About</a>
+            <a class="_3ThX2" href="">Terms</a>
+            <a class="_3ThX2" href="">Privacy</a>
+            <a class="_3ThX2 " href=""><i class="fab fa-facebook-square"></i>Facebook</a>
+            <a class="_3ThX2" href=""> <i class="fab fa-twitter-square"></i>Twitter</a>
+          </div>
     </div>
-    <script src="../js/components.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/component.js"></script>
     <script src="../js/index.js"></script>
     <script src="../js/view.js"></script>
+    <script src="../js/model.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/controller.js"></script>
 </body>
 </html>

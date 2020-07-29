@@ -1,0 +1,214 @@
+.create-card-screen {
+    height: auto;
+    background-color: D2FFFF;
+    padding-bottom:30px;
+    
+}
+
+.create-card-screen .main-create {
+    /* width: 1520px; */
+    /* height: 1284px; */
+    margin: auto;
+    display: flex;
+}
+.create-card-screen .main-create .create-collection-card {
+    width: 350px;
+    height: 600px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: FFE500;
+    margin-top: 38px;
+    border: 1px solid rgba(159, 244, 178, 0.5);
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+.create-card-screen .main-create .create-card-main {
+    /* width: 1000px; */
+    margin: 39px 0px 0px 38px;
+    background: #FFFFFF;
+    box-shadow: inset 2px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow-y: scroll;
+    width: 100%;
+	/* height: 100vh; */
+	scroll-behavior: smooth;
+  
+}
+.create-card-screen .main-create .create-card-main .card {
+    margin: 43px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0px;
+}
+.create-card-screen .main-create .create-card-main .card .font-card {
+    width: 425px;
+    height: 510px;
+    /* width: 557px; */
+    background: #FFE500;
+    box-shadow: 2px -4px 4px rgba(0, 0, 0, 0.1), -2px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    text-align: center;
+}
+.create-card-screen .main-create .create-card-main .card .back-card {
+    /* width: 425px; */
+    height: 510px;
+    /* width: 557px; */
+    background: #FFE500;
+    box-shadow: 2px -4px 4px rgba(0, 0, 0, 0.1), -2px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-left:15px;
+}
+
+.create-card-screen .main-create .create-collection-card .input-wrapper input {
+    width: 90%;
+    padding: 10px 13px;
+    height: 55px;
+    font-size: 30px;
+    margin: 20px;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.create-card-screen .main-create .create-collection-card input[type="file"] {
+    width: 275px;
+    height: 271px;
+    border-radius: 20px;
+    margin: 35px;
+    position: absolute;
+    opacity: 0;
+}
+.create-card-screen .main-create .create-collection-card img {
+    width: 275px;
+    height: 271px;
+    border-radius: 20px;
+    margin: 35px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 10px;
+}
+.create-card-screen .main-create .create-card-main .card .font-card .image-card input[type="file"] {
+    width: 260px;
+    height: 266px;
+    position: absolute;
+    margin: 42px 42px 0px 42px;
+    opacity: 0;
+    
+}
+.create-card-screen .main-create .create-card-main .card .font-card img {
+    width: 260px;
+    height: 266px;
+    margin: 42px 42px 0px 42px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+.create-card-screen .main-create .create-card-main .card .font-card .main-vocab .input-vocab input[type="text"]{
+    width: 300px;
+    height: 50px;
+    margin: 30px;
+    border-radius: 30px;
+    border: 1px solid black;
+    padding: 10px;
+    font-size:40px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+.create-card-screen .main-create .create-card-main .card .font-card .main-vocab input[type="file"] {
+    width: 18px;
+    font-size: 16px;
+    position: absolute;
+    opacity: 0;
+}
+
+.create-card-screen .main-create .create-card-main .card .font-card .main-vocab .pronuncitaion {
+    display: flex;
+    margin-left: 60px;
+}
+.create-card-screen .main-create .create-card-main .card .font-card .main-vocab input[type="text"] {
+    height: 20px;
+    border: 1px solid;
+    border-radius: 20px;
+    padding-left: 10px;
+    margin-top: 18px;
+}
+
+.create-card-screen .main-create .create-card-main .card .back-card input[type="text"] {
+    margin: 20px;
+    width: 90%;
+    height: 50px;
+    padding: 20px;
+    font-size: 20px;
+    border: 1px solid;
+    margin-bottom: 10px;
+}
+.btn-create{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 140px;
+    background-color: blue;
+}
+.btn-create:hover{
+    background-color: rgb(79, 79, 241);
+}
+.create-card-screen .main-create .create-card-main button i{
+    font-size: 60px;
+}
+.btn-add-card{
+    margin-left: 45%;
+    background-color: white;
+}
+.btn-add-example{
+    margin-left:180px;
+    background-color: #FFE500;
+}
+.create-card-main .fa-plus-circle{
+    color: #32CDFF;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.16);
+    border-radius: 16px;
+    padding: 10px;
+}
+#button-add-card #text{
+    font-size: 15px;
+}
+.create-card-main .meaning-error{
+    margin-left: 20px;
+}
+.create-card-main .same-meaning-error{
+    margin-left: 20px;
+}
+.create-collection-card #errorImageCollection.error{
+    text-align: center;
+}
+button#button-add-card {
+    margin-top: 20px;
+}
+.main-collection-card {
+    height: 117%;
+}
+.create-collection-card #errorContent.error{
+    text-align: center;
+}
+.image-card .image-collection-error {
+    margin-top: 15px;
+}
+.main-vocab .pronuncitaion{
+    margin-left: 60px; 
+    margin-top: 15px;
+    justify-content: space-around;
+}
+.pronuncitaion .sound-error{
+    margin-top:5px;
+}
+.create-card-screen .main-create{
+    margin-left:5%;
+    margin-right:5%;
+    
+}
+.create-collection-card #errorAmountCard {
+    margin-left:35%;
+}
+.pronuncitaion .sound .i.fas.fa-volume-up:hover{
+    color:blue;
+}
+.card .back-card .input-wrapper{
+    margin-top:20px;
+}
